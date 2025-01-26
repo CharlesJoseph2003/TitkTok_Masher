@@ -130,4 +130,11 @@ export class AudioProcessor {
     this.analyser.getByteFrequencyData(dataArray);
     return dataArray;
   }
+
+  async loadAudioFile(filePath: string) {
+    if (this.audioElement) {
+      this.audioElement.src = filePath;
+      await this.audioElement.load();
+    }
+  }
 }
