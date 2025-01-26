@@ -41,8 +41,9 @@ export default function Home() {
       }
 
       toast.success('Music transformation applied!');
-    } catch (error) {
-      toast.error(error.message || 'Something went wrong');
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Something went wrong';
+      toast.error(errorMessage);
     } finally {
       setIsProcessing(false);
     }
