@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 
+// Use environment variable or fallback to localhost for development
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
 function App() {
   const [url, setUrl] = useState('')
   const [response, setResponse] = useState(null)
@@ -14,7 +17,7 @@ function App() {
     console.log('Sending URL:', url)
     
     try {
-      const response = await fetch('http://localhost:5000/api/url', {
+      const response = await fetch(`${API_URL}/api/url`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +58,7 @@ function App() {
       {error && (
         <div className="error">
           <p>{error}</p>
-          <p>Make sure both the backend (port 5000) and frontend (port 5173) servers are running.</p>
+          <p>Make sure the backend server is running and accessible.</p>
         </div>
       )}
       {response && (
